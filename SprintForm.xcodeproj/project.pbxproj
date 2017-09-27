@@ -8,13 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		9540A4611F7AE85300CBCBF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540A4601F7AE85300CBCBF7 /* AppDelegate.swift */; };
-		9540A4631F7AE85300CBCBF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540A4621F7AE85300CBCBF7 /* ViewController.swift */; };
+		9540A4631F7AE85300CBCBF7 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540A4621F7AE85300CBCBF7 /* FormViewController.swift */; };
 		9540A4661F7AE85300CBCBF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9540A4641F7AE85300CBCBF7 /* Main.storyboard */; };
 		9540A4691F7AE85300CBCBF7 /* SprintForm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9540A4671F7AE85300CBCBF7 /* SprintForm.xcdatamodeld */; };
 		9540A46B1F7AE85300CBCBF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9540A46A1F7AE85300CBCBF7 /* Assets.xcassets */; };
 		9540A46E1F7AE85300CBCBF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9540A46C1F7AE85300CBCBF7 /* LaunchScreen.storyboard */; };
 		9540A4791F7AE85300CBCBF7 /* SprintFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540A4781F7AE85300CBCBF7 /* SprintFormTests.swift */; };
 		9540A4841F7AE85300CBCBF7 /* SprintFormUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540A4831F7AE85300CBCBF7 /* SprintFormUITests.swift */; };
+		9540A4C11F7AEE8B00CBCBF7 /* Sprint Sans Web-Black Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9540A4991F7AEDFF00CBCBF7 /* Sprint Sans Web-Black Italic.ttf */; };
+		9540A4C61F7AEE8B00CBCBF7 /* Sprint Sans Web-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9540A49E1F7AEDFF00CBCBF7 /* Sprint Sans Web-Black.ttf */; };
+		9540A4CB1F7AEE8B00CBCBF7 /* Sprint Sans Web-Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9540A4A31F7AEDFF00CBCBF7 /* Sprint Sans Web-Bold Italic.ttf */; };
+		9540A4D01F7AEE8B00CBCBF7 /* Sprint Sans Web-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9540A4A81F7AEDFF00CBCBF7 /* Sprint Sans Web-Bold.ttf */; };
+		9540A4D51F7AEE8B00CBCBF7 /* Sprint Sans Web-Medium Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9540A4AD1F7AEDFF00CBCBF7 /* Sprint Sans Web-Medium Italic.ttf */; };
+		9540A4DA1F7AEE8B00CBCBF7 /* Sprint Sans Web-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9540A4B21F7AEDFF00CBCBF7 /* Sprint Sans Web-Medium.ttf */; };
+		9540A4DF1F7AEE8B00CBCBF7 /* Sprint Sans Web-Regular Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9540A4B71F7AEDFF00CBCBF7 /* Sprint Sans Web-Regular Italic.ttf */; };
+		9540A4E41F7AEE8B00CBCBF7 /* Sprint Sans Web-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9540A4BC1F7AEDFF00CBCBF7 /* Sprint Sans Web-Regular.ttf */; };
+		958E9BEF1F7C2F7C00EE89B7 /* LeftPaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E9BEE1F7C2F7C00EE89B7 /* LeftPaddedTextField.swift */; };
+		958E9BF11F7C3B0A00EE89B7 /* PickerTriggerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E9BF01F7C3B0A00EE89B7 /* PickerTriggerButton.swift */; };
+		958E9BF31F7C443E00EE89B7 /* States.plist in Resources */ = {isa = PBXBuildFile; fileRef = 958E9BF21F7C443E00EE89B7 /* States.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +48,7 @@
 /* Begin PBXFileReference section */
 		9540A45D1F7AE85300CBCBF7 /* SprintForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SprintForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9540A4601F7AE85300CBCBF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9540A4621F7AE85300CBCBF7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9540A4621F7AE85300CBCBF7 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		9540A4651F7AE85300CBCBF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9540A4681F7AE85300CBCBF7 /* SprintForm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SprintForm.xcdatamodel; sourceTree = "<group>"; };
 		9540A46A1F7AE85300CBCBF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +60,17 @@
 		9540A47F1F7AE85300CBCBF7 /* SprintFormUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SprintFormUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9540A4831F7AE85300CBCBF7 /* SprintFormUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintFormUITests.swift; sourceTree = "<group>"; };
 		9540A4851F7AE85300CBCBF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9540A4991F7AEDFF00CBCBF7 /* Sprint Sans Web-Black Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sprint Sans Web-Black Italic.ttf"; sourceTree = "<group>"; };
+		9540A49E1F7AEDFF00CBCBF7 /* Sprint Sans Web-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sprint Sans Web-Black.ttf"; sourceTree = "<group>"; };
+		9540A4A31F7AEDFF00CBCBF7 /* Sprint Sans Web-Bold Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sprint Sans Web-Bold Italic.ttf"; sourceTree = "<group>"; };
+		9540A4A81F7AEDFF00CBCBF7 /* Sprint Sans Web-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sprint Sans Web-Bold.ttf"; sourceTree = "<group>"; };
+		9540A4AD1F7AEDFF00CBCBF7 /* Sprint Sans Web-Medium Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sprint Sans Web-Medium Italic.ttf"; sourceTree = "<group>"; };
+		9540A4B21F7AEDFF00CBCBF7 /* Sprint Sans Web-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sprint Sans Web-Medium.ttf"; sourceTree = "<group>"; };
+		9540A4B71F7AEDFF00CBCBF7 /* Sprint Sans Web-Regular Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sprint Sans Web-Regular Italic.ttf"; sourceTree = "<group>"; };
+		9540A4BC1F7AEDFF00CBCBF7 /* Sprint Sans Web-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sprint Sans Web-Regular.ttf"; sourceTree = "<group>"; };
+		958E9BEE1F7C2F7C00EE89B7 /* LeftPaddedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftPaddedTextField.swift; sourceTree = "<group>"; };
+		958E9BF01F7C3B0A00EE89B7 /* PickerTriggerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTriggerButton.swift; sourceTree = "<group>"; };
+		958E9BF21F7C443E00EE89B7 /* States.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = States.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +121,16 @@
 		9540A45F1F7AE85300CBCBF7 /* SprintForm */ = {
 			isa = PBXGroup;
 			children = (
+				958E9BF01F7C3B0A00EE89B7 /* PickerTriggerButton.swift */,
+				9540A4931F7AE9C200CBCBF7 /* Assets */,
 				9540A4601F7AE85300CBCBF7 /* AppDelegate.swift */,
-				9540A4621F7AE85300CBCBF7 /* ViewController.swift */,
+				9540A4621F7AE85300CBCBF7 /* FormViewController.swift */,
 				9540A4641F7AE85300CBCBF7 /* Main.storyboard */,
 				9540A46A1F7AE85300CBCBF7 /* Assets.xcassets */,
 				9540A46C1F7AE85300CBCBF7 /* LaunchScreen.storyboard */,
 				9540A46F1F7AE85300CBCBF7 /* Info.plist */,
 				9540A4671F7AE85300CBCBF7 /* SprintForm.xcdatamodeld */,
+				958E9BEE1F7C2F7C00EE89B7 /* LeftPaddedTextField.swift */,
 			);
 			path = SprintForm;
 			sourceTree = "<group>";
@@ -126,6 +151,30 @@
 				9540A4851F7AE85300CBCBF7 /* Info.plist */,
 			);
 			path = SprintFormUITests;
+			sourceTree = "<group>";
+		};
+		9540A4931F7AE9C200CBCBF7 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				958E9BF21F7C443E00EE89B7 /* States.plist */,
+				9540A4941F7AEDFF00CBCBF7 /* fonts */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		9540A4941F7AEDFF00CBCBF7 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9540A4991F7AEDFF00CBCBF7 /* Sprint Sans Web-Black Italic.ttf */,
+				9540A49E1F7AEDFF00CBCBF7 /* Sprint Sans Web-Black.ttf */,
+				9540A4A31F7AEDFF00CBCBF7 /* Sprint Sans Web-Bold Italic.ttf */,
+				9540A4A81F7AEDFF00CBCBF7 /* Sprint Sans Web-Bold.ttf */,
+				9540A4AD1F7AEDFF00CBCBF7 /* Sprint Sans Web-Medium Italic.ttf */,
+				9540A4B21F7AEDFF00CBCBF7 /* Sprint Sans Web-Medium.ttf */,
+				9540A4B71F7AEDFF00CBCBF7 /* Sprint Sans Web-Regular Italic.ttf */,
+				9540A4BC1F7AEDFF00CBCBF7 /* Sprint Sans Web-Regular.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +284,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9540A4C11F7AEE8B00CBCBF7 /* Sprint Sans Web-Black Italic.ttf in Resources */,
+				9540A4C61F7AEE8B00CBCBF7 /* Sprint Sans Web-Black.ttf in Resources */,
+				958E9BF31F7C443E00EE89B7 /* States.plist in Resources */,
+				9540A4CB1F7AEE8B00CBCBF7 /* Sprint Sans Web-Bold Italic.ttf in Resources */,
+				9540A4D01F7AEE8B00CBCBF7 /* Sprint Sans Web-Bold.ttf in Resources */,
+				9540A4D51F7AEE8B00CBCBF7 /* Sprint Sans Web-Medium Italic.ttf in Resources */,
+				9540A4DA1F7AEE8B00CBCBF7 /* Sprint Sans Web-Medium.ttf in Resources */,
+				9540A4DF1F7AEE8B00CBCBF7 /* Sprint Sans Web-Regular Italic.ttf in Resources */,
+				9540A4E41F7AEE8B00CBCBF7 /* Sprint Sans Web-Regular.ttf in Resources */,
 				9540A46E1F7AE85300CBCBF7 /* LaunchScreen.storyboard in Resources */,
 				9540A46B1F7AE85300CBCBF7 /* Assets.xcassets in Resources */,
 				9540A4661F7AE85300CBCBF7 /* Main.storyboard in Resources */,
@@ -262,8 +320,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9540A4631F7AE85300CBCBF7 /* ViewController.swift in Sources */,
+				9540A4631F7AE85300CBCBF7 /* FormViewController.swift in Sources */,
+				958E9BF11F7C3B0A00EE89B7 /* PickerTriggerButton.swift in Sources */,
 				9540A4691F7AE85300CBCBF7 /* SprintForm.xcdatamodeld in Sources */,
+				958E9BEF1F7C2F7C00EE89B7 /* LeftPaddedTextField.swift in Sources */,
 				9540A4611F7AE85300CBCBF7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,7 +497,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jpenterprises.SprintForm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -452,7 +512,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jpenterprises.SprintForm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
