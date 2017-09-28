@@ -27,13 +27,16 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("FormViewController loaded")
+        
+        print(self.navigationController)
         // Initialize state options
         let statesPlist = Bundle.main.resourceURL?.appendingPathComponent("States.plist")
         
         let statesDict = NSDictionary(contentsOf: statesPlist!)
         self.stateOptions = []
         if let statesDictCopy = statesDict {
-            for (stateName, stateCode) in statesDictCopy {
+            for (stateName, _) in statesDictCopy {
                 self.stateOptions.append(stateName as! String)
             }
         }
@@ -104,9 +107,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         if (self.dropdownFields!.count > 0) {
             for textfield in self.dropdownFields {
                 var options:[String] = [];
-                if (textfield.tag == 100) {
+                if (textfield.tag == 70) {
                     options = ["Sprint", "AT&T", "Verizon", "T-Mobile", "Cricket"];
-                } else if (textfield.tag == 105) {
+                } else if (textfield.tag == 90) {
                     options = self.stateOptions;
                 } else {
                     options = ["Yes", "No"];
@@ -119,6 +122,18 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Adjust fonts for textfields
+        if (self.textFields.count > 0) {
+            for textfield in self.textFields {
+                textfield.layer.borderColor = UIColor.darkGray.cgColor
+                textfield.text = nil
+                //textfield.layer.borderColor = UIColor.darkGray.cgColor
+            }
+        }
     }
     
     /**
@@ -174,6 +189,38 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
      **/
     @IBAction func submitForm(_ sender: UIButton) {
         print("Submit form from button", sender)
+        var data: [String: Any] = [:]
+        var errors: [String: Any] = [:]
+        for textfield in self.textFields {
+            let label: UILabel? = self.view.viewWithTag(textfield.tag - 1) as? UILabel
+            let fieldName = label?.text?
+                .lowercased()
+                .replacingOccurrences(of: "-", with: " ")
+                .split(separator: " ")
+                .joined(separator: "_")
+            
+            if (textfield.text == "" || textfield.text == nil) {
+                errors[fieldName!] = textfield.text
+                textfield.layer.borderColor = UIColor.red.cgColor
+                textfield.layer.borderWidth = 1.0
+                print("Error: " + fieldName! + " = " + textfield.text!)
+            } else {
+                data[fieldName!] = textfield.text
+                textfield.layer.borderColor = UIColor.darkGray.cgColor
+                textfield.layer.borderWidth = 1.0
+                print("Good data: " + fieldName! + " = " + textfield.text!)
+            }
+        }
+        if (errors.count > 0) {
+            let alert = UIAlertController(title: "Form invalid", message: "Please fill out all the required fields.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            // Submit the data.
+            
+            let thankYouController = self.storyboard?.instantiateViewController(withIdentifier: "ThankYouViewController") as? ThankYouViewController
+            self.navigationController?.pushViewController(thankYouController!, animated: true)
+        }
     }
     
     
@@ -203,7 +250,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if (row > 0) {
             self.activePickerTrigger!.selectedOption = row
-            var title = self.activePickerTrigger!.pickerOptions![row] as String
+            let title = self.activePickerTrigger!.pickerOptions![row] as String
             self.activePickerTrigger!.targetTextfield!.text = title
 //            if let defaultValues:Dictionary<String,AnyObject> = self.defaultValues {
 //                var _defaults = defaultValues
