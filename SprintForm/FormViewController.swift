@@ -254,20 +254,18 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         // Create Core Data model
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let submission = Submission(context: context)
-        submission.first_name = data["first_name"] as! String
-        submission.last_name = data["last_name"] as! String
-        submission.street_address = data["last_name"] as! String
-        submission.mobile_number = data["last_name"] as! String
-        submission.e_mail_address = data["last_name"] as! String
-        submission.how_many_lines_on_account = data["last_name"] as! String
-        submission.how_many_tablets_on_account = data["last_name"] as! String
-        submission.zip_code = data["last_name"] as! String
-        submission.city = data["last_name"] as! String
-        submission.current_carrier = data["last_name"] as! String
-        submission.state = data["last_name"] as! String
-        let opt_out = data["opt_out"] as! String
-        
-        submission.opt_out = opt_out == "Yes"
+        submission.first_name = data["first_name"] as? String
+        submission.last_name = data["last_name"] as? String
+        submission.street_address = data["last_name"] as? String
+        submission.mobile_number = data["last_name"] as? String
+        submission.e_mail_address = data["last_name"] as? String
+        submission.how_many_lines_on_account = data["last_name"] as? String
+        submission.how_many_tablets_on_account = data["last_name"] as? String
+        submission.zip_code = data["last_name"] as? String
+        submission.city = data["last_name"] as? String
+        submission.current_carrier = data["last_name"] as? String
+        submission.state = data["last_name"] as? String
+        submission.opt_out = ((data["opt_out"] as? String) == "Yes")
         submission.created_at = Date()
         
         // Save
