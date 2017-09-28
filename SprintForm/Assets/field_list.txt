@@ -1,0 +1,12 @@
+Error: first_name = 
+Error: last_name = 
+Error: street_address = 
+Error: mobile_number = 
+Error: e_mail_address = 
+Error: how_many_lines_on_account = 
+Error: how_many_tablets_on_account = 
+Error: zip_code = 
+Error: city = 
+Error: current_carrier = 
+Error: state = 
+Error: opt_out = 
