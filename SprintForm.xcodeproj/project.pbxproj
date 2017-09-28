@@ -27,6 +27,8 @@
 		958E9BF11F7C3B0A00EE89B7 /* PickerTriggerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E9BF01F7C3B0A00EE89B7 /* PickerTriggerButton.swift */; };
 		958E9BF31F7C443E00EE89B7 /* States.plist in Resources */ = {isa = PBXBuildFile; fileRef = 958E9BF21F7C443E00EE89B7 /* States.plist */; };
 		958E9BF71F7D3C2D00EE89B7 /* ThankYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E9BF61F7D3C2D00EE89B7 /* ThankYouViewController.swift */; };
+		958E9C121F7D5E8E00EE89B7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958E9C111F7D5E8E00EE89B7 /* Alamofire.framework */; };
+		958E9C131F7D5E8E00EE89B7 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 958E9C111F7D5E8E00EE89B7 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +48,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		958E9C141F7D5E8E00EE89B7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				958E9C131F7D5E8E00EE89B7 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		9540A45D1F7AE85300CBCBF7 /* SprintForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SprintForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9540A45D1F7AE85300CBCBF7 /* Sprint Form.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sprint Form.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9540A4601F7AE85300CBCBF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9540A4621F7AE85300CBCBF7 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		9540A4651F7AE85300CBCBF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -73,6 +89,7 @@
 		958E9BF01F7C3B0A00EE89B7 /* PickerTriggerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTriggerButton.swift; sourceTree = "<group>"; };
 		958E9BF21F7C443E00EE89B7 /* States.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = States.plist; sourceTree = "<group>"; };
 		958E9BF61F7D3C2D00EE89B7 /* ThankYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankYouViewController.swift; sourceTree = "<group>"; };
+		958E9C111F7D5E8E00EE89B7 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				958E9C121F7D5E8E00EE89B7 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +121,7 @@
 		9540A4541F7AE85300CBCBF7 = {
 			isa = PBXGroup;
 			children = (
+				958E9C111F7D5E8E00EE89B7 /* Alamofire.framework */,
 				9540A45F1F7AE85300CBCBF7 /* SprintForm */,
 				9540A4771F7AE85300CBCBF7 /* SprintFormTests */,
 				9540A4821F7AE85300CBCBF7 /* SprintFormUITests */,
@@ -113,7 +132,7 @@
 		9540A45E1F7AE85300CBCBF7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9540A45D1F7AE85300CBCBF7 /* SprintForm.app */,
+				9540A45D1F7AE85300CBCBF7 /* Sprint Form.app */,
 				9540A4741F7AE85300CBCBF7 /* SprintFormTests.xctest */,
 				9540A47F1F7AE85300CBCBF7 /* SprintFormUITests.xctest */,
 			);
@@ -190,6 +209,7 @@
 				9540A4591F7AE85300CBCBF7 /* Sources */,
 				9540A45A1F7AE85300CBCBF7 /* Frameworks */,
 				9540A45B1F7AE85300CBCBF7 /* Resources */,
+				958E9C141F7D5E8E00EE89B7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -197,7 +217,7 @@
 			);
 			name = SprintForm;
 			productName = SprintForm;
-			productReference = 9540A45D1F7AE85300CBCBF7 /* SprintForm.app */;
+			productReference = 9540A45D1F7AE85300CBCBF7 /* Sprint Form.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9540A4731F7AE85300CBCBF7 /* SprintFormTests */ = {
@@ -499,7 +519,7 @@
 				INFOPLIST_FILE = SprintForm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jpenterprises.SprintForm;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Sprint Form";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -514,7 +534,7 @@
 				INFOPLIST_FILE = SprintForm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jpenterprises.SprintForm;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Sprint Form";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};

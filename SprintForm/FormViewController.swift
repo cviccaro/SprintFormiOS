@@ -199,7 +199,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                 .split(separator: " ")
                 .joined(separator: "_")
             
-            if (textfield.text == "" || textfield.text == nil) {
+            let required = self.requiredLabels.contains(label!)
+
+            if (required && (textfield.text == "" || textfield.text == nil)) {
                 errors[fieldName!] = textfield.text
                 textfield.layer.borderColor = UIColor.red.cgColor
                 textfield.layer.borderWidth = 1.0
