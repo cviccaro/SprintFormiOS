@@ -23,14 +23,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     //var popOverController:UIPopoverController?
     
     var stateOptions: [String] = [];
-    var dropdownFieldMap: [String: Any] = [:];
+    var dropdownFieldMap: [String: PickerTriggerButton] = [:];
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("FormViewController loaded")
-        
-        print(self.navigationController)
         // Initialize state options
         let statesPlist = Bundle.main.resourceURL?.appendingPathComponent("States.plist")
         
@@ -134,6 +131,12 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             for textfield in self.textFields {
                 textfield.layer.borderColor = UIColor.darkGray.cgColor
                 textfield.text = nil
+            }
+        }
+        // Reset dropdown fields values
+        if (self.dropdownFieldMap.count > 0) {
+            for (key, trigger) in self.dropdownFieldMap {
+                trigger.selectedOption = 0
             }
         }
     }
