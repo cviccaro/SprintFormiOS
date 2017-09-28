@@ -111,7 +111,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             for textfield in self.dropdownFields {
                 var options:[String] = [];
                 if (textfield.tag == 70) {
-                    options = ["Sprint", "AT&T", "Verizon", "T-Mobile", "Cricket"];
+                    options = ["AT&T", "Sprint", "T-Mobile", "Verizon"];
                 } else if (textfield.tag == 90) {
                     options = self.stateOptions;
                 } else {
@@ -134,7 +134,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             for textfield in self.textFields {
                 textfield.layer.borderColor = UIColor.darkGray.cgColor
                 textfield.text = nil
-                //textfield.layer.borderColor = UIColor.darkGray.cgColor
             }
         }
     }
