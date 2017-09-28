@@ -23,6 +23,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     //var popOverController:UIPopoverController?
     
     var stateOptions: [String] = [];
+    var dropdownFieldMap: [String: Any] = [:];
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +92,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             
             i = i + 1;
         }
+        
+        // Created asteriks for required labels
         if (self.requiredLabels.count > 0) {
             for label in self.requiredLabels {
                 let requiredLabel = UILabel()
@@ -135,6 +138,23 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             }
         }
     }
+   
+//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        let fieldName = self.fieldNameForTextField(textField: textField)
+//        print("Text Field Should Begin Editing? ", fieldName)
+//        if (self.dropdownFields.contains(textField)) {
+//            let fieldName = self.fieldNameForTextField(textField: textField)
+//            let trigger = self.dropdownFieldMap[fieldName] as! PickerTriggerButton
+//            if (!(self.popOver?.isBeingPresented)!) {
+//                print("Trigger for " + fieldName + ": ", trigger)
+//                self.displayPicker(trigger)
+//            }
+//            return true;
+//        }
+//
+//        return true;
+//    }
+    
     
     /**
      * Create Dropdown Field
@@ -144,6 +164,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         let options = ["Please select one..."] + opts
         // Build textfield
         textField.delegate = self
+        
+        textField.isUserInteractionEnabled = false
+        
         var defaultValueOption = 0
         // Inject default value
 //        if ((defaultValue) != nil && !defaultValue!.isKind(of: NSNull)) {
@@ -179,9 +202,19 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         //trigger.fieldName = field_name
         trigger.selectedOption = defaultValueOption
         trigger.addTarget(self, action: #selector(FormViewController.displayPicker(_:)), for: UIControlEvents.touchUpInside)
-        
+        let fieldName = self.fieldNameForTextField(textField: textField)
+        self.dropdownFieldMap[fieldName] = trigger;
         // Add trigger to subviews
         self.view!.addSubview(trigger)
+    }
+    
+    func fieldNameForTextField(textField: UITextField) -> String {
+        let label: UILabel? = self.view.viewWithTag(textField.tag - 1) as? UILabel
+        return (label?.text?
+            .lowercased()
+            .replacingOccurrences(of: "-", with: " ")
+            .split(separator: " ")
+            .joined(separator: "_"))!
     }
     
     /**
@@ -193,24 +226,19 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         var errors: [String: Any] = [:]
         for textfield in self.textFields {
             let label: UILabel? = self.view.viewWithTag(textfield.tag - 1) as? UILabel
-            let fieldName = label?.text?
-                .lowercased()
-                .replacingOccurrences(of: "-", with: " ")
-                .split(separator: " ")
-                .joined(separator: "_")
-            
+            let fieldName = self.fieldNameForTextField(textField: textfield)
             let required = self.requiredLabels.contains(label!)
 
             if (required && (textfield.text == "" || textfield.text == nil)) {
-                errors[fieldName!] = textfield.text
+                errors[fieldName] = textfield.text
                 textfield.layer.borderColor = UIColor.red.cgColor
                 textfield.layer.borderWidth = 1.0
-                print("Error: " + fieldName! + " = " + textfield.text!)
+                print("Error: " + fieldName + " = " + textfield.text!)
             } else {
-                data[fieldName!] = textfield.text
+                data[fieldName] = textfield.text
                 textfield.layer.borderColor = UIColor.darkGray.cgColor
                 textfield.layer.borderWidth = 1.0
-                print("Good data: " + fieldName! + " = " + textfield.text!)
+                print("Good data: " + fieldName + " = " + textfield.text!)
             }
         }
         if (errors.count > 0) {
@@ -219,12 +247,37 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             self.present(alert, animated: true, completion: nil)
         } else {
             // Submit the data.
-            
-            let thankYouController = self.storyboard?.instantiateViewController(withIdentifier: "ThankYouViewController") as? ThankYouViewController
-            self.navigationController?.pushViewController(thankYouController!, animated: true)
+            self.createSubmission(data: data)
         }
     }
     
+    func createSubmission(data: [String:Any]) {
+        // Create Core Data model
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let submission = Submission(context: context)
+        submission.first_name = data["first_name"] as! String
+        submission.last_name = data["last_name"] as! String
+        submission.street_address = data["last_name"] as! String
+        submission.mobile_number = data["last_name"] as! String
+        submission.e_mail_address = data["last_name"] as! String
+        submission.how_many_lines_on_account = data["last_name"] as! String
+        submission.how_many_tablets_on_account = data["last_name"] as! String
+        submission.zip_code = data["last_name"] as! String
+        submission.city = data["last_name"] as! String
+        submission.current_carrier = data["last_name"] as! String
+        submission.state = data["last_name"] as! String
+        let opt_out = data["opt_out"] as! String
+        
+        submission.opt_out = opt_out == "Yes"
+        submission.created_at = Date()
+        
+        // Save
+        print(submission)
+        //(UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+        let thankYouController = self.storyboard?.instantiateViewController(withIdentifier: "ThankYouViewController") as? ThankYouViewController
+        self.navigationController?.pushViewController(thankYouController!, animated: true)
+    }
     
     // MARK: Picker
     @objc func displayPicker(_ sender: PickerTriggerButton?) {

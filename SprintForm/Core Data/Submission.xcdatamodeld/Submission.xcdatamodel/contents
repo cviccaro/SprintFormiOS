@@ -2,7 +2,6 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Submission" representedClassName="Submission" syncable="YES" codeGenerationType="class">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="created_at" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="current_carrier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="e_mail_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="first_name" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,6 +15,6 @@
         <attribute name="zip_code" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Submission" positionX="-54" positionY="-9" width="128" height="240"/>
+        <element name="Submission" positionX="-63" positionY="-18" width="128" height="225"/>
     </elements>
 </model>
