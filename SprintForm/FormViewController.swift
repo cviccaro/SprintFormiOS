@@ -16,6 +16,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet var textFields:[UITextField]!;
     @IBOutlet var dropdownFields: [UITextField]!;
     @IBOutlet var helpText:UILabel!;
+    @IBOutlet var scrollView:UIScrollView!;
     
     var activePickerTrigger:PickerTriggerButton?
     var pickerView:UIPickerView?
@@ -27,6 +28,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         // Initialize state options
         let statesPlist = Bundle.main.resourceURL?.appendingPathComponent("States.plist")
@@ -39,7 +43,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             }
         }
         self.stateOptions.sort()
-        print(self.stateOptions)
 
         // Create picker view controller
         if (self.pickerView == nil) {
@@ -99,7 +102,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                 requiredLabel.font = UIFont(name: "SprintSansWeb-Medium", size: 16.0)
                 requiredLabel.textColor = UIColor(red: (248.0 / 256.0), green: (9.0/256.0), blue: (71.0/256.0), alpha: 1.0)
                 requiredLabel.sizeToFit()
-                self.view.addSubview(requiredLabel);
+                self.scrollView!.addSubview(requiredLabel);
             }
         }
         
@@ -139,6 +142,22 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                 trigger.selectedOption = 0
             }
         }
+    }
+    
+    @objc func keyboardWillShow(notification:NSNotification){
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height + 20
+        scrollView.contentInset = contentInset
+    }
+    
+    @objc func keyboardWillHide(notification:NSNotification){
+        
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
     }
    
 //    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -207,7 +226,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         let fieldName = self.fieldNameForTextField(textField: textField)
         self.dropdownFieldMap[fieldName] = trigger;
         // Add trigger to subviews
-        self.view!.addSubview(trigger)
+        self.scrollView!.addSubview(trigger)
     }
     
     func fieldNameForTextField(textField: UITextField) -> String {
