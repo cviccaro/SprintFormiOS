@@ -259,21 +259,22 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         let submission = Submission(context: context)
         submission.first_name = data["first_name"] as? String
         submission.last_name = data["last_name"] as? String
-        submission.street_address = data["last_name"] as? String
-        submission.mobile_number = data["last_name"] as? String
-        submission.e_mail_address = data["last_name"] as? String
-        submission.how_many_lines_on_account = data["last_name"] as? String
-        submission.how_many_tablets_on_account = data["last_name"] as? String
-        submission.zip_code = data["last_name"] as? String
-        submission.city = data["last_name"] as? String
-        submission.current_carrier = data["last_name"] as? String
-        submission.state = data["last_name"] as? String
+        submission.street_address = data["street_address"] as? String
+        submission.mobile_number = data["mobile_number"] as? String
+        submission.e_mail_address = data["e_mail_address"] as? String
+        submission.how_many_lines_on_account = data["how_many_lines_on_account"] as? String
+        submission.how_many_tablets_on_account = data["how_many_tablets_on_account"] as? String
+        submission.zip_code = data["zip_code"] as? String
+        submission.city = data["city"] as? String
+        submission.current_carrier = data["current_carrier"] as? String
+        submission.state = data["state"] as? String
         submission.opt_out = ((data["opt_out"] as? String) == "Yes")
         submission.created_at = Date()
+        submission.uploaded = false
         
         // Save
         print(submission)
-        //(UIApplication.shared.delegate as! AppDelegate).saveContext()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
         let thankYouController = self.storyboard?.instantiateViewController(withIdentifier: "ThankYouViewController") as? ThankYouViewController
         self.navigationController?.pushViewController(thankYouController!, animated: true)
