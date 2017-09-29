@@ -11,7 +11,7 @@ import Alamofire
 import CoreData
 
 class DataManager {
-    var uploadUrl = "http://sprint-form.localhost/submit"
+    var uploadUrl = "http://sprint-form.jpedev.com/submit"
     var timer: Timer?
     
     func startTimer() {
@@ -72,7 +72,7 @@ class DataManager {
                         }
                     }
             } else {
-                print(String(format:"Skipping upload of submission created_at %@ because it has already been uploaded.", submission.created_at!.debugDescription))
+                //print(String(format:"Skipping upload of submission created_at %@ because it has already been uploaded.", submission.created_at!.debugDescription))
             }
         }
     }
