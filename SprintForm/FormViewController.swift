@@ -19,6 +19,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet var scrollView:UIScrollView!;
     
     var activePickerTrigger:PickerTriggerButton?
+    var activeField:UITextField?
     var pickerView:UIPickerView?
     var popOver:UIViewController?
     //var popOverController:UIPopoverController?
@@ -64,6 +65,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         if (self.textFields.count > 0) {
             for textfield in self.textFields {
                 textfield.font = UIFont(name: "SprintSansWeb-Regular", size: 15.0)
+                textfield.delegate = self
             }
         }
         
@@ -129,6 +131,9 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        self.scrollView.contentSize = self.view.frame.size
+        
         // Adjust fonts for textfields
         if (self.textFields.count > 0) {
             for textfield in self.textFields {
@@ -138,44 +143,60 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         }
         // Reset dropdown fields values
         if (self.dropdownFieldMap.count > 0) {
-            for (key, trigger) in self.dropdownFieldMap {
+            for (_, trigger) in self.dropdownFieldMap {
                 trigger.selectedOption = 0
             }
         }
     }
     
+    
+    
     @objc func keyboardWillShow(notification:NSNotification){
         var userInfo = notification.userInfo!
-        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        let kbSize:CGSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue.size
         
-        var contentInset:UIEdgeInsets = self.scrollView.contentInset
-        contentInset.bottom = keyboardFrame.size.height + 20
-        scrollView.contentInset = contentInset
+        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height + 10, 0.0);
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+
+        var viewFrame = self.view.frame
+        viewFrame.size.height = viewFrame.size.height - kbSize.height - 10
+
+        if (!viewFrame.contains(self.activeField!.frame.origin)) {
+            self.scrollView.scrollRectToVisible(self.activeField!.frame, animated: true)
+        }
     }
     
     @objc func keyboardWillHide(notification:NSNotification){
-        
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
     }
    
 //    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        self.activeField = textField
+//
 //        let fieldName = self.fieldNameForTextField(textField: textField)
 //        print("Text Field Should Begin Editing? ", fieldName)
-//        if (self.dropdownFields.contains(textField)) {
-//            let fieldName = self.fieldNameForTextField(textField: textField)
-//            let trigger = self.dropdownFieldMap[fieldName] as! PickerTriggerButton
-//            if (!(self.popOver?.isBeingPresented)!) {
-//                print("Trigger for " + fieldName + ": ", trigger)
-//                self.displayPicker(trigger)
-//            }
-//            return true;
-//        }
+////        if (self.dropdownFields.contains(textField)) {
+////            let fieldName = self.fieldNameForTextField(textField: textField)
+////            let trigger = self.dropdownFieldMap[fieldName] as! PickerTriggerButton
+////            if (!(self.popOver?.isBeingPresented)!) {
+////                print("Trigger for " + fieldName + ": ", trigger)
+////                self.displayPicker(trigger)
+////            }
+////            return true;
+////        }
 //
 //        return true;
 //    }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeField = textField
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.activeField = nil
+    }
     
     /**
      * Create Dropdown Field
