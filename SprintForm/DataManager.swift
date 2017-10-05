@@ -57,6 +57,7 @@ class DataManager {
                     "how_many_lines_on_account": submission.how_many_lines_on_account!,
                     "how_many_tablets_on_account": submission.how_many_tablets_on_account!,
                     "opt_out": submission.opt_out,
+                    "udid": submission.udid,
                     "created_at": submission.created_at!
                 ]
                 print("Uploading submission with data: ", parameters)

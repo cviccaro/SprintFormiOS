@@ -29,7 +29,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
@@ -112,10 +112,12 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         if (self.dropdownFields!.count > 0) {
             for textfield in self.dropdownFields {
                 var options:[String] = [];
-                if (textfield.tag == 70) {
-                    options = ["AT&T", "Sprint", "T-Mobile", "Verizon"];
-                } else if (textfield.tag == 90) {
+                if (textfield.tag == 120) {
+                    options = ["AT&T", "Cricket", "PCS Mobile", "Sprint", "T-Mobile", "Verizon"];
+                } else if (textfield.tag == 50) {
                     options = self.stateOptions;
+                } else if (textfield.tag == 90 || textfield.tag == 100) {
+                    options = ["0","1","2","3","4","5","6","7","8","9","10"];
                 } else {
                     options = ["Yes", "No"];
                 }
@@ -162,7 +164,7 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         var viewFrame = self.view.frame
         viewFrame.size.height = viewFrame.size.height - kbSize.height - 10
 
-        if (!viewFrame.contains(self.activeField!.frame.origin)) {
+        if (self.activeField !== nil && !viewFrame.contains(self.activeField!.frame.origin)) {
             self.scrollView.scrollRectToVisible(self.activeField!.frame, animated: true)
         }
     }
@@ -172,23 +174,37 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         scrollView.contentInset = contentInset
     }
    
-//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        self.activeField = textField
-//
-//        let fieldName = self.fieldNameForTextField(textField: textField)
-//        print("Text Field Should Begin Editing? ", fieldName)
-////        if (self.dropdownFields.contains(textField)) {
-////            let fieldName = self.fieldNameForTextField(textField: textField)
-////            let trigger = self.dropdownFieldMap[fieldName] as! PickerTriggerButton
-////            if (!(self.popOver?.isBeingPresented)!) {
-////                print("Trigger for " + fieldName + ": ", trigger)
-////                self.displayPicker(trigger)
-////            }
-////            return true;
-////        }
-//
-//        return true;
-//    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let nextTage=textField.tag+10;
+
+        // Try to find next responder
+        let nextResponder=textField.superview?.viewWithTag(nextTage) as UIResponder!
+
+        if (nextResponder != nil){
+            if self.activePickerTrigger != nil {
+                self.popOver!.dismiss(animated: false)
+            }
+            if (self.dropdownFields.contains(nextResponder as! UITextField)) {
+                let fieldName = self.fieldNameForTextField(textField: nextResponder as! UITextField)
+                let picker = self.dropdownFieldMap[fieldName]
+                if (picker != nil) {
+                    let welf = self
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25,execute: {
+                        welf.displayPicker(picker)
+                    })
+                    textField.resignFirstResponder()
+                }
+            }
+            nextResponder?.becomeFirstResponder()
+        }
+        else
+        {
+            // Not found, so remove keyboard
+            textField.resignFirstResponder()
+        }
+        return false // We do not want UITextField to insert line-breaks.
+    }
+    
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeField = textField
@@ -202,50 +218,18 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
      * Create Dropdown Field
      **/
     func createDropdown(textField: UITextField, opts: Array<String>) {
-        // add blank option
-        let options = ["Please select one..."] + opts
-        // Build textfield
         textField.delegate = self
-        
-        textField.isUserInteractionEnabled = false
-        
-        var defaultValueOption = 0
-        // Inject default value
-//        if ((defaultValue) != nil && !defaultValue!.isKind(of: NSNull)) {
-//            if (isBoolField) {
-//                if (defaultValue as! String == "1") {
-//                    textField.text = "Yes"
-//                    defaultValueOption = 1
-//                }
-//                else {
-//                    textField.text = "No"
-//                    defaultValueOption = 2
-//                }
-//            }
-//            else {
-//                var defaultValueString = defaultValue as! String
-//                var i = 0
-//                //self.logger.log(String(format:"Scanning options %@ for value: %@", options, defaultValueString))
-//                for val in options {
-//                    if (val == defaultValueString) {
-//                        defaultValueOption = i
-//                        textField.text = val
-//                        //self.logger.log(String(format:"Found text %@ in options as index %ld", defaultValueString, i))
-//                    }
-//                    i += 1
-//                }
-//            }
-//        }
-//
+       // textField.isUserInteractionEnabled = false
         
         // Create trigger
-        
+        let options = ["Please select one..."] + opts
         let trigger = PickerTriggerButton(frame: textField.frame, pickerOptions: options, targetTextfield: textField)
-        //trigger.fieldName = field_name
-        trigger.selectedOption = defaultValueOption
+        trigger.selectedOption = 0
         trigger.addTarget(self, action: #selector(FormViewController.displayPicker(_:)), for: UIControlEvents.touchUpInside)
+        
         let fieldName = self.fieldNameForTextField(textField: textField)
         self.dropdownFieldMap[fieldName] = trigger;
+        
         // Add trigger to subviews
         self.scrollView!.addSubview(trigger)
     }
@@ -263,34 +247,102 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
      * Submit Form
      **/
     @IBAction func submitForm(_ sender: UIButton) {
-        print("Submit form from button", sender)
         var data: [String: Any] = [:]
-        var errors: [String: Any] = [:]
+        var errors: [String: String] = [:]
         for textfield in self.textFields {
             let label: UILabel? = self.view.viewWithTag(textfield.tag - 1) as? UILabel
             let fieldName = self.fieldNameForTextField(textField: textfield)
             let required = self.requiredLabels.contains(label!)
 
             if (required && (textfield.text == "" || textfield.text == nil)) {
-                errors[fieldName] = textfield.text
-                textfield.layer.borderColor = UIColor.red.cgColor
-                textfield.layer.borderWidth = 1.0
-                print("Error: " + fieldName + " = " + textfield.text!)
+                errors[fieldName] = "required"
+                self.markFieldError(textfield: textfield)
             } else {
                 data[fieldName] = textfield.text
-                textfield.layer.borderColor = UIColor.darkGray.cgColor
-                textfield.layer.borderWidth = 1.0
-                print("Good data: " + fieldName + " = " + textfield.text!)
+                self.clearFieldError(textfield: textfield)
+            }
+            
+            // validate zip
+            if (textfield.tag == 60) {
+                if (!self.isValidZip(testStr: textfield.text!)) {
+                    errors[fieldName] = "zip"
+                    self.markFieldError(textfield: textfield)
+                } else {
+                    self.clearFieldError(textfield: textfield)
+                }
+            }
+            
+            // validate email
+            if (textfield.tag == 70) {
+                if (!self.isValidEmail(testStr: textfield.text!)) {
+                    errors[fieldName] = "email"
+                    self.markFieldError(textfield: textfield)
+                } else {
+                    self.clearFieldError(textfield: textfield)
+                }
+            }
+            
+            // validate phone
+            if (textfield.tag == 80) {
+                if (!self.isValidPhone(testStr: textfield.text!)) {
+                    errors[fieldName] = "phone"
+                    self.markFieldError(textfield: textfield)
+                } else {
+                    self.clearFieldError(textfield: textfield)
+                }
             }
         }
         if (errors.count > 0) {
-            let alert = UIAlertController(title: "Form invalid", message: "Please fill out all the required fields.", preferredStyle: .alert)
+            var errorMessage = ""
+            if (errors.values.contains("required")) {
+                errorMessage += "Please fill out all the required fields."
+            }
+            if (errors.values.contains("zip")) {
+                errorMessage += "\r\nPlease enter a valid zip code."
+            }
+            if (errors.values.contains("email")) {
+                errorMessage += "\r\nPlease enter a valid email."
+            }
+            if (errors.values.contains("phone")) {
+                errorMessage += "\r\nPlease enter a valid mobile phone number."
+            }
+            let alert = UIAlertController(title: "Form invalid", message: errorMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
             // Submit the data.
             self.createSubmission(data: data)
         }
+    }
+    
+    func markFieldError(textfield: UITextField) {
+        textfield.layer.borderColor = UIColor.red.cgColor
+        textfield.layer.borderWidth = 1.0
+    }
+    
+    func clearFieldError(textfield: UITextField) {
+        textfield.layer.borderColor = UIColor.darkGray.cgColor
+        textfield.layer.borderWidth = 1.0
+    }
+    
+    func isValidZip(testStr:String) -> Bool {
+        let ZIP_REGEX = "(^[0-9]{5}(-[0-9]{4})?$)"
+        
+        let zipTest = NSPredicate(format:"SELF MATCHES %@", ZIP_REGEX)
+        return zipTest.evaluate(with: testStr)
+    }
+    
+    func isValidEmail(testStr:String) -> Bool {
+        let EMAIL_REGEX = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", EMAIL_REGEX)
+        return emailTest.evaluate(with: testStr)
+    }
+    
+    func isValidPhone(testStr:String) -> Bool {
+        let PHONE_REGEX = "^\\d?-?\\d{3}-?\\d{3}-?\\d{4}$"
+        let phoneTest = NSPredicate(format:"SELF MATCHES %@", PHONE_REGEX)
+        return phoneTest.evaluate(with: testStr)
     }
     
     func createSubmission(data: [String:Any]) {
@@ -309,11 +361,13 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         submission.current_carrier = data["current_carrier"] as? String
         submission.state = data["state"] as? String
         submission.opt_out = ((data["opt_out"] as? String) == "Yes")
+        submission.udid = UIDevice.current.identifierForVendor!.uuidString
+
         submission.created_at = Date()
         submission.uploaded = false
         
         // Save
-        print(submission)
+//        print(submission)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
         let thankYouController = self.storyboard?.instantiateViewController(withIdentifier: "ThankYouViewController") as? ThankYouViewController
@@ -323,10 +377,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     // MARK: Picker
     @objc func displayPicker(_ sender: PickerTriggerButton?) {
         self.activePickerTrigger = sender
-        print(String(format:"display picker from %@.  Our target textfield is %@.  Default value is %ld", sender!, sender!.targetTextfield!, self.activePickerTrigger!.selectedOption))
+//        print(String(format:"display picker from %@.  Our target textfield is %@.  Default value is %ld", sender!, sender!.targetTextfield!, self.activePickerTrigger!.selectedOption))
         self.pickerView?.reloadAllComponents()
         self.pickerView?.selectRow(self.activePickerTrigger!.selectedOption, inComponent: 0, animated: false)
         self.popOver!.preferredContentSize = CGSize(width: self.activePickerTrigger!.frame.size.width, height: self.activePickerTrigger!.frame.size.height * 5)
+        
         self.present(self.popOver!, animated: true, completion: nil);
         
         let popoverPresentationController = self.popOver!.popoverPresentationController
@@ -348,14 +403,6 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             self.activePickerTrigger!.selectedOption = row
             let title = self.activePickerTrigger!.pickerOptions![row] as String
             self.activePickerTrigger!.targetTextfield!.text = title
-//            if let defaultValues:Dictionary<String,AnyObject> = self.defaultValues {
-//                var _defaults = defaultValues
-//                var fieldname = self.activePickerTrigger!.fieldName!
-//                _defaults[fieldname] = title as AnyObject
-//                self.defaultValues = _defaults
-//            }
-            print(String(format: "selected row %d in picker.  returns value %@", row, title))
-            print(String(format: "Setting %@ as value of textfield %@", title, self.activePickerTrigger!.targetTextfield!))
         }
     }
 
