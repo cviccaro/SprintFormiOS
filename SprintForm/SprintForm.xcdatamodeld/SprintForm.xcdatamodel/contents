@@ -13,11 +13,12 @@
         <attribute name="opt_out" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="street_address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tracking_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="udid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uploaded" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="zip_code" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Submission" positionX="-54" positionY="-9" width="128" height="270"/>
+        <element name="Submission" positionX="-54" positionY="-9" width="128" height="285"/>
     </elements>
 </model>

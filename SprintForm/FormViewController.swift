@@ -27,6 +27,8 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     var stateOptions: [String] = [];
     var dropdownFieldMap: [String: PickerTriggerButton] = [:];
 
+    var appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -362,12 +364,11 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         submission.state = data["state"] as? String
         submission.opt_out = ((data["opt_out"] as? String) == "Yes")
         submission.udid = UIDevice.current.identifierForVendor!.uuidString
-
+        submission.tracking_id = self.appDelegate.trackingID
         submission.created_at = Date()
         submission.uploaded = false
         
         // Save
-//        print(submission)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
         let thankYouController = self.storyboard?.instantiateViewController(withIdentifier: "ThankYouViewController") as? ThankYouViewController
