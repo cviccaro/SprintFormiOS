@@ -30,6 +30,7 @@
 		958E9C121F7D5E8E00EE89B7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958E9C111F7D5E8E00EE89B7 /* Alamofire.framework */; };
 		958E9C131F7D5E8E00EE89B7 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 958E9C111F7D5E8E00EE89B7 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		958E9C161F7D70EE00EE89B7 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E9C151F7D70EE00EE89B7 /* DataManager.swift */; };
+		95952D931F8F9B2900ECAB5B /* InstallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95952D921F8F9B2900ECAB5B /* InstallViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		958E9BF61F7D3C2D00EE89B7 /* ThankYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankYouViewController.swift; sourceTree = "<group>"; };
 		958E9C111F7D5E8E00EE89B7 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		958E9C151F7D70EE00EE89B7 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		95952D921F8F9B2900ECAB5B /* InstallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				9540A4671F7AE85300CBCBF7 /* SprintForm.xcdatamodeld */,
 				958E9BEE1F7C2F7C00EE89B7 /* LeftPaddedTextField.swift */,
 				958E9BF61F7D3C2D00EE89B7 /* ThankYouViewController.swift */,
+				95952D921F8F9B2900ECAB5B /* InstallViewController.swift */,
 				958E9C151F7D70EE00EE89B7 /* DataManager.swift */,
 			);
 			path = SprintForm;
@@ -350,6 +353,7 @@
 				958E9BF11F7C3B0A00EE89B7 /* PickerTriggerButton.swift in Sources */,
 				9540A4691F7AE85300CBCBF7 /* SprintForm.xcdatamodeld in Sources */,
 				958E9C161F7D70EE00EE89B7 /* DataManager.swift in Sources */,
+				95952D931F8F9B2900ECAB5B /* InstallViewController.swift in Sources */,
 				958E9BF71F7D3C2D00EE89B7 /* ThankYouViewController.swift in Sources */,
 				958E9BEF1F7C2F7C00EE89B7 /* LeftPaddedTextField.swift in Sources */,
 				9540A4611F7AE85300CBCBF7 /* AppDelegate.swift in Sources */,

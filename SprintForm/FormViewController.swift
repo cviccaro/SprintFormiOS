@@ -10,13 +10,14 @@ import UIKit
 
 class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
 
-    @IBOutlet var yellowBanner:UIView?
-    @IBOutlet var requiredLabels:[UILabel]!;
-    @IBOutlet var fieldLabels:[UILabel]!;
-    @IBOutlet var textFields:[UITextField]!;
-    @IBOutlet var dropdownFields: [UITextField]!;
-    @IBOutlet var helpText:UILabel!;
-    @IBOutlet var scrollView:UIScrollView!;
+    @IBOutlet var yellowBanner: UIView?
+    @IBOutlet var requiredLabels: [UILabel]!
+    @IBOutlet var fieldLabels: [UILabel]!
+    @IBOutlet var textFields: [UITextField]!
+    @IBOutlet var dropdownFields: [UITextField]!
+    @IBOutlet var helpText: UILabel!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var trackingLabel: UILabel?
     
     var activePickerTrigger:PickerTriggerButton?
     var activeField:UITextField?
@@ -27,10 +28,26 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     var stateOptions: [String] = [];
     var dropdownFieldMap: [String: PickerTriggerButton] = [:];
 
+    var installViewController: InstallViewController?
     var appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let storedId = UserDefaults.standard.string(forKey: "sprint_form_tracking_id")
+        
+        if (storedId == nil) {
+            if (self.installViewController == nil) {
+                self.installViewController = self.storyboard?.instantiateViewController(withIdentifier: "install") as? InstallViewController
+                self.installViewController?.modalPresentationStyle = UIModalPresentationStyle.formSheet
+                self.navigationController?.present(self.installViewController!, animated: true)
+            }
+        } else {
+            self.appDelegate.trackingID = storedId!
+            self.trackingLabel?.text = self.appDelegate.sources[self.appDelegate.trackingID]
+            self.trackingLabel?.sizeToFit()
+            print("Using stored Sprint Form Tracking ID: ", self.appDelegate.trackingID,  self.trackingLabel?.text)
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -79,6 +96,10 @@ class FormViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                 label.font = UIFont(name: "SprintSansWeb-Medium", size: 17.0)
                 label.sizeToFit()
             }
+        }
+        
+        if (self.trackingLabel != nil) {
+            self.trackingLabel!.font = UIFont(name: "SprintSansWeb-Regular", size: 10.0)
         }
         
         var i = 0;

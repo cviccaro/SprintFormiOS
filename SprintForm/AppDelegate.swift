@@ -14,8 +14,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var dataManager: DataManager = DataManager()
-    var trackingID: String = "7455"
-
+    var trackingID: String = ""
+    var sources = [
+        "jp" : "JP Devices",
+        "102": "Store 102",
+        "103": "Store 103",
+        "341": "Store 341",
+        "356": "Store 356",
+        "461": "Store 461",
+        "686": "Store 686",
+        "985": "Store 985",
+        "986": "Store 986",
+        "7436": "Store 7436",
+        "7438": "Store 7438",
+        "7439": "Store 7439",
+        "7440": "Store 7440",
+        "7444": "Store 7444",
+        "7455": "Store 7455"
+    ]
+    
+    var sourceMap: [String] = [
+        "jp",
+        "102",
+        "103",
+        "341",
+        "356",
+        "461",
+        "686",
+        "985",
+        "986",
+        "7436",
+        "7438",
+        "7440",
+        "7444",
+        "7455"
+    ]
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
