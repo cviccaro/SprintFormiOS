@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var dataManager: DataManager = DataManager()
     var trackingID: String = ""
     var sources = [
-        "jp" : "JP Devices",
+        //"jp" : "JP Devices",
         "102": "Store 102",
         "103": "Store 103",
         "341": "Store 341",
@@ -25,16 +25,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         "686": "Store 686",
         "985": "Store 985",
         "986": "Store 986",
+        "6601": "Store 6601",
         "7436": "Store 7436",
         "7438": "Store 7438",
         "7439": "Store 7439",
         "7440": "Store 7440",
         "7444": "Store 7444",
-        "7455": "Store 7455"
+        "7455": "Store 7455",
+        "anna": "Anna"
     ]
     
     var sourceMap: [String] = [
-        "jp",
+        //"jp",
         "102",
         "103",
         "341",
@@ -43,11 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         "686",
         "985",
         "986",
+        "6601",
         "7436",
         "7438",
         "7440",
         "7444",
-        "7455"
+        "7455",
+        "anna"
     ]
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
