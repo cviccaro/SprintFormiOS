@@ -19,12 +19,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //"jp" : "JP Devices",
         "102": "Store 102",
         "103": "Store 103",
+        "112": "Store 112",
+        "277": "Store 277",
         "341": "Store 341",
+        "353": "Store 353",
         "356": "Store 356",
+        "460": "Store 460",
         "461": "Store 461",
         "686": "Store 686",
+        "693": "Store 693",
+        "756": "Store 756",
+        "762": "Store 762",
+        "857": "Store 857",
+        "874": "Store 874",
         "985": "Store 985",
         "986": "Store 986",
+        "1445": "Store 1445",
+        "2093": "Store 2093",
+        "4935": "Store 4935",
+        "6582": "Store 6582",
+        "6583": "Store 6583",
+        "6584": "Store 6584",
+        "6588": "Store 6588",
+        "6596": "Store 6596",
         "6601": "Store 6601",
         "7436": "Store 7436",
         "7438": "Store 7438",
@@ -32,27 +49,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         "7440": "Store 7440",
         "7444": "Store 7444",
         "7455": "Store 7455",
+        "7968": "Store 7968",
         "anna": "Anna"
     ]
-    
+
     var sourceMap: [String] = [
         //"jp",
         "102",
         "103",
+        "112",
+        "277",
         "341",
+        "353",
         "356",
+        "460",
         "461",
         "686",
+        "693",
+        "756",
+        "762",
+        "857",
+        "874",
         "985",
         "986",
+        "1445",
+        "2093",
+        "4935",
+        "6582",
+        "6583",
+        "6584",
+        "6588",
+        "6596",
         "6601",
         "7436",
         "7438",
+        "7439",
         "7440",
         "7444",
         "7455",
+        "7968",
         "anna"
-    ]
+    ],
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -99,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
+
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
