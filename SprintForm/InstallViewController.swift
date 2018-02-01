@@ -40,6 +40,7 @@ class InstallViewController : UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var i = 0
+        //print("selected indexPath", indexPath)
         for _ in self.appDelegate.sourceMap {
             if (i != indexPath.row) {
                 if let cell = self.tableView?.cellForRow(at: IndexPath(row: i, section: 0)) {
@@ -49,6 +50,8 @@ class InstallViewController : UIViewController, UITableViewDelegate, UITableView
             i = i + 1
         }
         if let cell = self.tableView?.cellForRow(at: indexPath) {
+            //print("selected cell", indexPath)
+            //print("selected val in map:", self.appDelegate.sourceMap[indexPath.row])
             if (cell.accessoryType == .checkmark) {
                 cell.accessoryType = .none
                 self.selectedSource = nil
@@ -64,8 +67,10 @@ class InstallViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func save(_ sender: UIButton) {
+        //print("clicked save")
         if let source = self.selectedSource {
             UserDefaults.standard.setValue(source, forKey: "sprint_form_tracking_id")
+            //print("source: ", source)
             self.appDelegate.trackingID = source
             self.dismiss(animated: true, completion: nil)
         }

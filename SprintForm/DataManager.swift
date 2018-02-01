@@ -39,6 +39,10 @@ class DataManager {
         }
     }
     
+    func push() {
+        self.uploadSubmissions(timer:nil)
+    }
+    
     @objc func uploadSubmissions(timer: Timer?) {
         let context = self.getContext()
         let submissions = self.getSubmissions()
